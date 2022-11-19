@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Data.Migrations
 {
-    public partial class ExtendedUserEntity : Migration
+    public partial class ExtentedUserEntity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,12 @@ namespace API.Data.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "Gender",
+                table: "Users",
+                type: "TEXT",
+                nullable: true);
+
+            migrationBuilder.AddColumn<string>(
+                name: "Interests",
                 table: "Users",
                 type: "TEXT",
                 nullable: true);
@@ -117,6 +123,10 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Gender",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "Interests",
                 table: "Users");
 
             migrationBuilder.DropColumn(
