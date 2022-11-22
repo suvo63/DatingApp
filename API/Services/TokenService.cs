@@ -21,22 +21,23 @@ namespace API.Services
 
         public string CreateToken(AppUser user)
         {
-            var claims= new List<Claim>
+            var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.NameId,user.Username)
+                new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName,user.Username)
             };
 
-            var creds=new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var tokenDescriptor=new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject= new ClaimsIdentity(claims),
-                Expires=DateTime.Now.AddDays(7),
-                SigningCredentials=creds
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = creds
             };
 
-            var tokenHandler= new JwtSecurityTokenHandler();
-            var token=tokenHandler.CreateToken(tokenDescriptor);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
         }
