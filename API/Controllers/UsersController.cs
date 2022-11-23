@@ -35,7 +35,8 @@ namespace API.Controllers
                 userParams.Gender=user.Gender=="male"? "female" : "male";
                 
             var users=await userRepository.GetMembersAsync(userParams);
-            Response.AddPaginationHeader(users.CurrentPage,users.PageSize,users.TotalCount,users.TotalPages);
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage,
+                users.PageSize,users.TotalCount,users.TotalPages));
             return Ok(users);
         }
 
