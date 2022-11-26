@@ -21,7 +21,6 @@ namespace API
         {
             services.AddApplicationServices(Configuration);
             services.AddControllers();
-            services.AddCors();
             services.AddIdentityServices(Configuration);
             services.AddSwaggerGen(c =>
             {
