@@ -29,7 +29,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
             var user= await userRepository.GetUserByUsernameAsync(User.GetUsername());
-            userParams.CurrentUsername=user.Username;
+            userParams.CurrentUsername=user.UserName;
 
             if(string.IsNullOrWhiteSpace(userParams.Gender))
                 userParams.Gender=user.Gender=="male"? "female" : "male";
@@ -80,7 +80,7 @@ namespace API.Controllers
 
             if(await userRepository.SaveAllAsync())
             {
-                return CreatedAtRoute("GetUser",new {username=user.Username}, mapper.Map<PhotoDto>(photo));
+                return CreatedAtRoute("GetUser",new {username=user.UserName}, mapper.Map<PhotoDto>(photo));
             }
             
             return BadRequest("Problem adding photo");

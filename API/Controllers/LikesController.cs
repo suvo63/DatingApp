@@ -30,7 +30,7 @@ namespace API.Controllers
 
             if (likedUser == null) return NotFound();
 
-            if (sourceUser.Username == username) return BadRequest("You cannot like yourself");
+            if (sourceUser.UserName == username) return BadRequest("You cannot like yourself");
 
             var userLike = await likesRepository.GetUserLikeAsync(sourceUserId, likedUser.Id);
 

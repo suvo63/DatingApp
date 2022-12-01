@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { MembersService } from 'src/app/_services/members.service';
@@ -21,7 +22,7 @@ export class MemberDetailsComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(private memberService: MembersService, private route: ActivatedRoute,
-    private messageService: MessageService) { }
+    private messageService: MessageService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     
@@ -84,5 +85,11 @@ export class MemberDetailsComponent implements OnInit {
     if (this.activeTab.heading == "Messages") {
       this.loadMessages();
     }
+  }
+
+  addLike(member: Member){
+    this.memberService.addLike(member.username).subscribe({
+      next:()=> this.toastr.success('You have liked '+ member.knownAs)
+    });
   }
 }
