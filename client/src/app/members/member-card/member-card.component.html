@@ -13,9 +13,7 @@
                 </button>
             </li>
             <li class="list-inline-item">
-                <button 
-                    routerLink="/members/{{member.username}}"
-                    [queryParams]="{tab:'Messages'}"
+                <button routerLink="/members/{{member.username}}" [queryParams]="{tab:'Messages'}"
                     class="btn btn-primary">
                     <i class="fa fa-envelope"></i>
                 </button>
@@ -23,7 +21,10 @@
         </ul>
     </div>
     <div class="card-body p-1">
-        <h6 class="card-title text-center mb-1"><i class="fa fa-user mr-2"></i>
+        <h6 class="card-title text-center mb-1">
+            <span [class.is-online]="(presenceService.onlineUsers$ | async )?.includes(member.username)">
+                <i class="fa fa-user mr-2"></i>
+            </span>
             {{member.knownAs}}, {{member.age}}
         </h6>
         <p class="card-text text-muted text-center">

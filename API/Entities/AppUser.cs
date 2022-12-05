@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Extentions;
+using API.Extensions;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities

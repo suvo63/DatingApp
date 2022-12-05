@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using API.Helpers;
 
-namespace API.Extentions
+namespace API.Extensions
 {
     public static class HttpExtentions
     {
