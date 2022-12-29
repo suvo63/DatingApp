@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
@@ -26,12 +26,15 @@ export class MemberDetailsComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   user?: User;
   constructor(private accountService: AccountService, private route: ActivatedRoute,
-    private messageService: MessageService, public presenceService: PresenceService) {
+    private messageService: MessageService, public presenceService: PresenceService,
+    private router:Router) {
     accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
         if (user) this.user = user;
       }
     });
+    
+    router.routeReuseStrategy.shouldReuseRoute=()=>false;
   }
 
   ngOnInit(): void {
